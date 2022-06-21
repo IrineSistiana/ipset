@@ -162,6 +162,10 @@ func (nl *NetLink) FlushSet(setName string) error {
 	return syscall.Sendto(nl.fd, req.Serialize(), 0, &nl.lsa)
 }
 
+func (nl *NetLink) Close() error {
+	return syscall.Close(nl.fd)
+}
+
 // HandleAddr adds netip.Addr/netip.Prefix to set.
 func (nl *NetLink) HandleAddr(cmd int, setName string, ip netip.Addr, cidr netip.Prefix, opts ...Option) error {
 	if setName == "" {
